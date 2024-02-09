@@ -1,4 +1,4 @@
-# Large Language Models: A Whirlwind Tour on the Future of AI and Society
+# Large Language Models: A Crash Course
 
 A revolution as big as the invention of the printing press. we will multiply our intellignce
 in a way similar (or maybe far beyond) to how the printing press multiplied our intelligence.
@@ -17,7 +17,26 @@ This is a presentation on the topic of large language models (LLMs) and their im
 
 ## History of AI and Machine Learning
 
-i'll go over a brief history of AI/ML, era of deep learning, era of self-supervised learning using giant NNs LLM using transformers. as prelude, talk about idea of predition = compression = intelligence, and agency is a sort of search over the prediction space and choosing actions that are predicted to lead to highest expected reward (often reward is implicit). draw from solomonoff induction, AIXI (marcus hutter). show how LLMs and sequence models are an approximation of this. 
+### Good-Old-Fashioned AI
+
+These are the early days of AI, when researchers were trying to build intelligent systems using symbolic logic and rule-based systems. The idea was to encode human knowledge into a computer program, and then use that program to reason about the world. This approach had some success, particularly for problems that could be solved using symbolic reasoning, but it was not very good at dealing with the messiness and uncertainty of the real world. For instance, we don't know how to describe the rules for recognizing a cat, but we can recognize a cat when we see one. We don't know how we do it, so we can't tell a program how to do it.
+
+
+### Machine Learning and Statistical Learning Theory
+
+At some point, we realize we had to learn from data. This is the idea behind statistical learning theory. The idea is to learn a model from data. This is a very powerful idea, because it allows us to teach a computer how to do things that we don't know how to write down an algorithm for. For example, we can learn to recognize a cat from examples of cats. Successes were very limited.
+
+Even the neural network (multi-layer percepton) was invented during this time, but it was not very popular as they were difficult to train and were computationally expensive. They were theoretically understood to be *universal function* approximators, but that assumes that we had an efficient way to train them and a sufficient amount of data to train them on. This was not the case at the time.
+
+### The Era of Deep Learning
+
+ 
+
+### The Era of Self-Supervised Learning Using Giant Neural Networks
+
+- There is good news though: LLMs are a form of (neural) symbolic reasoning too, but they are learned from data, and they are not limited to the rules we can write down. They can learn to recognize cats from examples of cats, and they can learn to do many other things too. These tools can
+
+
 
 ## On Intelligence
 what is intelligence?
