@@ -1,0 +1,48 @@
+For LLM systems design, we can borrow the idea of memory hierarchy from computer architecture and draw a lot of parallels.
+
+Longer context doesn't invalidate the need for "RAG".
+Larger LLMs don't invalidate the need for search engines.
+
+Different layers of the stack.
+
+## Embeddings (Association)
+
+Link that one talk that mentions how most of these vector DBs are not quite doing it right.
+
+VectorDBs as search engines, as implemented by the current breed of AI Engineers, is a misuse of the technology; most of the issues they run into can be easily resolved by going to a search engine.
+
+That said, VectorDBs which can be run in-memory, as memory, are awesome.
+
+## Search
+
+Still one of the best ways to look up information from a huge KB like google search.
+Search is a tool -- trained to use search in ways similiar to how we use search
+
+
+
+
+
+
+
+Weights: ROM (read-only ROM)
+Currently, at least, since they don't learn online. That'll probably change soon.
+It's also quite large -- but nothing is stored explicitly, it's a bunch of
+floating point numbers.
+
+[Show diagram of NN]
+
+
+In-Context: Pr(output | input)
+When sampling outputs from LLM, we normally do a greedy kind of algorithm and
+do a token at a time instead of `output`. Ideally, we'd do a search over all
+possible outputs and sample based on those probabilities, but you have to
+account for length bias, i.e., longer outputs smaller probability by the product rule.
+
+See my tweet on this.
+
+
+
+
+### LLM-OS
+
+See Karpathy (link video) and MemGPT

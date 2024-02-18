@@ -1,0 +1,48 @@
+Watch previous SLUUG presenter's talk on LLMs / ChatGPT
+
+Gemini 1.5 (Google)
+	- Link to paper. We can go over it. 1 million context and more.
+	- Hints at 10 million tokens
+		- Mention that one Haystack test
+Sora (OpenAI)
+	- Show videos
+	- Link to technical report
+	- Discuss ideas. World models? Intuitive physics engine? Show Jim Fan tweet.
+	- Show Lecun. Show Google Deepmind RL twitter discussion.
+		* Poke fun at self.
+
+What is ChatGPT doing?
+	- Link to Stephen Wolfram
+	- Mention who he is.
+
+n-grams
+	- use my naive implementation to frame a lot of the discussion
+	- in-context
+	- generative / predictive
+	
+
+
+sampling procedures
+	- I want to show the next-token probabilities in a nice UI. i think openai's playground does this.
+	 * the cat sat on the _ <-- should show a bunch of possibilities
+	 * also, color coding how probably the next-token is, red for unsure i think green for sure
+	 * at inference time, increasing temperature should make everything more uniform (uncertain)
+	 * at training time, it tries to learn the actual probability distribution of the data,
+           so temperature is a rescaling setting for changing inference-time behavior
+		- temp = 1 -- estimates prob dist (DGP).
+		- temp < 1 -- reduces randomness, i.e., more predictable outputs
+		- temp = 0 -- deterministic, the local argmax (given context, what is most
+			probable next-token)
+		- temp = infinity - uniform distribution on the top-k or top-p tokens
+		- top-p = 0.9 means that, when you order tokens by most to least
+		probable, you choose enough of the  most probable tokens such
+		that they sum to 0.9 prob. these tokens will be sampled from,
+		temperature applies only to them.
+		- top-k = 10 means include the 10 most probable tokens in the possible outputs 
+		temperature applies only to them.
+	- talk about other sampling methods
+		- talk about what sampling methods are doing at inference time.
+		- mention how inference time sampling is almost always OOD, since
+		when we train it, we don't train it on its own outputs normally, but the raw data.
+		* beam search -- explore multiple paths and sample the most likely? not sure.
+		* prompting strategies: CoT, ToT, CoT-SC, etc etc 

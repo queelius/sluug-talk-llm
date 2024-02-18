@@ -6,6 +6,7 @@
   - autogen: work on something interesting, use both the terminal and the studio
   - show ollama from command line too
   - show open interpreter -- explain how this will be generalized to most tasks
+    
 
 - I want to do something with fine-tuning
   - give me a chance to talk about important of data

@@ -19,21 +19,127 @@ This is a presentation on the topic of large language models (LLMs) and their im
 
 ### Good-Old-Fashioned AI
 
-These are the early days of AI, when researchers were trying to build intelligent systems using symbolic logic and rule-based systems. The idea was to encode human knowledge into a computer program, and then use that program to reason about the world. This approach had some success, particularly for problems that could be solved using symbolic reasoning, but it was not very good at dealing with the messiness and uncertainty of the real world. For instance, we don't know how to describe the rules for recognizing a cat, but we can recognize a cat when we see one. We don't know how we do it, so we can't tell a program how to do it.
+#### Symbolic Logic
+This era goes way back to antiquity, where formal logic was first developed. The hope was that we could encode human knowledge in a symbolic form and then apply a mechanical process to solve problems. A classic example:
 
+1. Premise: All birds can fly.
+2. Premise: A sparrow is a bird.
+3. Conclusion: A sparrow can fly.
 
-### Machine Learning and Statistical Learning Theory
+The encoded knowledge are the premises, and the mechanical process
+is the logical inference that leads to the conclusion. If the premises are true, then the conclusion must be true. This is called *deductive reasoning*.
 
-At some point, we realize we had to learn from data. This is the idea behind statistical learning theory. The idea is to learn a model from data. This is a very powerful idea, because it allows us to teach a computer how to do things that we don't know how to write down an algorithm for. For example, we can learn to recognize a cat from examples of cats. Successes were very limited.
+Typically, we're faced with incomplete information, so we need to reason under uncertainty:
+
+1. Observation: Every sparrow we've seen can fly.
+2. Prediction: The next sparrow we see will be able to fly.
+
+This is called *inductive reasoning*. It is a generalization of the evidence to a conclusion. We often want to *understand* the evidence we have:
+
+1. Rule: Birds are known to fly and have feathers.
+2. Evidence: You see a small feathered flying creature.
+3. Hypothesis: The creature is a bird.
+
+#### Probabilistic Reasoning
+
+The real world is too complex to reason about with certainty, so we need to reason under uncertainty. In the earlier examples, each step had a degree of **uncertain**, and so we produced beliefs that are *likely* to be true. 
+
+One of the best tools we have for dealing with uncertainty is probability theory. We can encode our symbolic knowledge in a probabilistic form and then apply the probability calculus to reason under uncertainty. For instance, we might have evidence that $S$ is a sparrow, and we want to know the probability that $S$ can fly. In *Bayesian reasoning*, we can use Bayes' rule to compute:
+
+$$
+p(S|F) \propto p(F|S)p(S)
+$$
+
+where:
+
+- $p(S|F)$ is the probability that $S$ is a sparrow given that it can fly,
+- $p(F|S)$ is the probability that $S$ can fly given that it is a sparrow, and
+- $p(S)$ is the prior probability that $S$ is a sparrow.
+
+It may be easy to estimate $p(F|S)$ and $p(S)$, for instance
+the probability that of $F$ given $S$ is just the fraction of sparrows that can fly, and the prior probability that $S$ is a sparrow is just the fraction of birds that are sparrows. We can use these to compute the probability that $S$ is a sparrow given that it can fly, which may be more difficult to estimate and is the quantity we are interested in computing in the earlier example where we were trying to predict whether the next sparrow we see will be able to fly.
+
+#### The Challenge of Feature Engineerin
+
+In each of these examples, we decided which rules and symbols to use to represent the problem. In the early days of AI, we used this approach to automate various tasks. We encoded our knowledge in a symbolic form and then used computers to apply the rules. This is called *good-old-fashioned AI* (GOFAI). This is still predominately how we program computers today (and a large part of the way we *program* ourselves, arguably).
+
+This approach has had a lot of success, particularly for problems we know how to represent symbolically, e.g., super-human chess-playing programs. However, the "real world" is not so easy to represent. For instance, how do we model even a simple problem like computing the probability that a cat is in a picture? This is a task most humans can do effortlessly, but we don't know *how* we do it, so we can't write down the rules for it. This is a very important point: we can't write down the rules for everything we can do.
+
+### Machine Learning
+
+Since we don't know how we do many things, we can't write down the rules for doing them. However, as evidenced by our brains ability to do them, we can learn to do them from experience (data).
+
+This is the idea behind statistical learning theory. The idea is to learn a model from data. That is, a computer learns how to do things by looking at examples. So, even if we don't know know the rules, we can use an algorithm that learns the (often incomprensible) rules from data, such as learning how to recognize cats in pictures by looking at many examples of cats and non-cats.
+
+We can categorize the *data* into two types:
+
+1. Supervised and unsupervised. In supervised learning, we have a set of input-output pairs, and we want to learn a function that maps inputs to outputs. This is how we normally did things in the early days of machine learning, because it doesn't need as much compute nor as much data to reach a competent level of skill at whatever narrow task we trained it to do.
+
+2. Unsupervised learning, In unsupervised learning, we have a set of inputs, and we want to learn something about the data, such as clustering or density estimation. This is a much harder problem, because we don't have the labels to guide the learning process. We have to learn the structure of the data from the data itself.
+
+Learning the probability distribution is the most general form of statistical learning, as it allows us to do all of the other things that we seek to do in supervised learning, too, like classification. Suppose we have data
+
+$$
+x = (x_1, x_2, x_3, \ldots, x_n)'
+$$
+
+where each $x_j$ is some kind of observation or measurement about the data. If we learn (or estimate) the probability distribution of the data, $p(x)$, we can use that to do many tasks, like:
+
+- Classification: given an input, predict the class it belongs to. Let $y = g(x)$ be the class, where $g$ is the function that maps inputs to classes. We can use Bayes' rule to do this:
+
+$$
+p(y|x) = p(x,y)/Z
+$$
+where $Z$ is just a normalizing constant that ensures that the probabilities sum to 1. We can estimate $p(x,y)$ by sampling from $p(x)$ and computing the fraction of times that $g(x) = y$.
+For instance, suppose $y = x_n$, then predicting the class of $x$ is just $p(x_n|x_1,\ldots,x_{n-1}) = p(x_1,\ldots,x_n)/Z$ where
+$Z$ is just a normalizing constant and if $x_n$ is discrete, we
+can simply sum over all possible values of $x_n$ to compute $Z$:
+
+$$
+Z = \sum_{x_n} p(x_1,\ldots,x_n)
+$$
+
+which is actually just the marginal probability $p(x_1,\ldots,x_{n-1})$. If $x_n$ is continuous, we can use the integral instead of the sum.
+
+During this time, researchers developed many algorithms for learning from data, such as decision trees, support vector machines, neural networks, k-nearest neighbors, k-means clustering, and many others.
 
 Even the neural network (multi-layer percepton) was invented during this time, but it was not very popular as they were difficult to train and were computationally expensive. They were theoretically understood to be *universal function* approximators, but that assumes that we had an efficient way to train them and a sufficient amount of data to train them on. This was not the case at the time.
 
 ### The Era of Deep Learning
 
- 
 
-### The Era of Self-Supervised Learning Using Giant Neural Networks
+The biggest problem with the previous era in machine learning was
+that we had to hand-engineer the features. This is a very difficult
+problem: how do we *represent* the data? In the machine learning
+era, we freed ourselves to use very complicated models that had the capacity to represent more complicated data, but we still had to think about how to *represent* the data.
 
+The problem of representation is the problem of *feature engineering*. We have to decide what features to use to represent the data. This is a very difficult problem, and it is often the most important part of the machine learning process. If we don't have good features, then we can't learn a good model.
+
+In fact, during the era of GOFAI, we not only had to decide how to represnt the data, but also we had to write down the rules that operated on the data. We no longer had to write down the rules, but we still have to decide how to represent the data.
+
+This is the problem that deep learning solves. It learns the representation from the data. This is a very important point. We no longer have to decide how to represent the data. In fact, it's often said that deep learning is a form of representation learning. If we have the right representations, then we can learn the right model. Since the data is so complicted, normally the right model -- the right rules -- are also very complicated. This is why in deep learning, we use neural networks, which are universal function approximators.
+
+> NOTE: talk about backpropagation as the learning algorithm, and
+> the computational graph as the data structure that makes it
+> scale to large models and large data.
+
+If we give it enough data, a neural network can learn *any* function. The problem is, of course, how do we generate enough data?
+
+### The Era of Scale
+
+The era of scale is the era of absolutely gigantic neural networks that are trained on absolutely gigantic amounts of data. Note that in principle, we can use the same algorithms invented previously, but now on a much larger scale.
+
+However, in order to achieve that scale, we are obliged to use
+algorithms that scale with compute and data. This is the era of the transformer, and it is the era of the autoregress LLM and foundation models (multi-modal).
+
+How do we get enough data, though? We cannot rely upon labeled data, i.e., supervised learning, as there simply isn't enough
+curated data to train these models. We need to use unsupervised learning, and in particular, self-supervised learning. This is a form of unsupervised learning where we train the model to predict the next token in a sequence of tokens. This is how we learn
+to estimate the probability distribution of extremely complicated data generating processes.
+
+
+
+
+## Tool-Use
 - There is good news though: LLMs are a form of (neural) symbolic reasoning too, but they are learned from data, and they are not limited to the rules we can write down. They can learn to recognize cats from examples of cats, and they can learn to do many other things too. These tools can
 
 
