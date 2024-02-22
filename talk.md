@@ -11,7 +11,7 @@ math: mathjax
 - https://github.com/queelius :rocket:
 - https://twitter.com/queelius :bird:
 
-- URL for this talk: https://github.com/queelius/sluug-llm :link:
+- URL for this talk: https://github.com/queelius/sluug-talk-llm :link:
 
 ---
 
@@ -296,8 +296,6 @@ Various prompting strategies have been developed to help the model generate more
 ---
 
 
-
-
 ## LLM Overview
 
 - **Task**: Estimate the training data's probability distribution using next-token prediction (SSL)
@@ -311,7 +309,27 @@ Various prompting strategies have been developed to help the model generate more
       - Causal inductive bias: The model is biased to predict the next token based on the evidence of the previous tokens.
           *Example*: "Based on all the previous evidence, I conclude that the murderer is ___". To do this well, it seems you must be able to reason about the evidence.       
  
-## My Brain-dead N-Gram Model
+ ---
+## My Naive N-Gram Model
 
-- Let's go to the notebook. If you want to follow along, colab is available at http://lab.metafunctor.com:6789.
+- Let's go to the notebook.
+- If you want to follow along, colab is available at:
+    - https://colab.research.google.com/drive/1ak4kOtbIQGXE5kuhhGTd55xu4qRpeZd7?usp=sharing
+- See my GitHub at https://github.com/queelius/sluug-talk-llm
+
+---
+## Tool-Use
+
+There is a lot of training data about how to use tools and APIs.
+
+- Large LLMs like GPT-4 do a good job predicting when and how they should
+  use tools.
+
+- Let's go over to the ElasticSearch NLQ demo.
+
+
+---
+## Discussion
+
+
 
