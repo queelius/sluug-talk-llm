@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Check if a filename is provided
+if [ -z "$1" ]; then
+  echo "Usage: $0 <filename.tex>"
+  exit 1
+fi
+
+# Extract the filename without extension
+filename=$(basename -- "$1")
+extension="${filename##*.}"
+filename="${filename%.*}"
+
+# Compile .tex to .pdf using pdflatex
+echo "Compiling $1 to PDF..."
+pdflatex "$1"
+
+# Check if PDF generation was successful
+if [ $? -ne 0 ]; then
+  echo "PDF compilation failed."
+  exit 1
+fi
+
+# Convert .pdf to .png using convert
+echo "Converting PDF to PNG..."
+convert -density 300 "${filename}.pdf" -quality 90 "${filename}.png"
+
+# Check if PNG generation was successful
+if [ $? -ne 0 ]; then
+  echo "PNG conversion failed."
+  exit 1
+fi
+
+echo "Conversion complete."

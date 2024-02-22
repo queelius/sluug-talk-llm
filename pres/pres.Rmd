@@ -1,0 +1,195 @@
+---
+title: "Demystifying Large Language Models"
+author: Alex Towell (lex@metafunctor.com)
+date: "2024-02-21"
+output:
+  ioslides_presentation:
+    theme: bootstrap
+    slide_level: 2
+    css: custom.css
+  beamer_presentation:
+    theme: Boadilla
+    slide_level: 2
+header-includes:
+- \usepackage{tikz}
+- \usepackage{caption}
+- \usepackage{amsthm}
+- \usepackage{xcolor}
+- \setbeameroption{show notes on second screen=right}
+#bibliography: ../refs.bib
+---
+
+## Context & Motivation
+
+- **Large Language Models** (LLMs) have become a cornerstone of modern NLP.
+- **GPT-3** (OpenAI) and **BERT** (Google) are two prominent examples.
+- **GPT-3**: 175 billion parameters.
+- **BERT**: 340 million parameters.
+- **Applications**: Translation, summarization, question-answering, and more.
+
+
+\note{
+\begin{itemize}
+\item Hello
+\end{itemize}
+}
+
+
+# Theoretical Framework
+
+## What Is An Autogressive Language Model?
+
+```{r, out.width='70%', fig.align='center', echo=FALSE}
+knitr::include_graphics("../image/AR-model.png")
+```
+
+**System Lifetime** is dictated by its shortest-lived component:
+$$
+T_i = \min(T_{i 1}, \ldots, T_{i 5})
+$$
+where:
+
+- $T_i$ is the lifetime of $i$\textsuperscript{th} system.
+- $T_{i j}$ is the $j$\textsuperscript{th} component of $i$\textsuperscript{th} system.
+
+\note{
+\begin{itemize}
+\item Talk briefly about AR models.
+\item Go to OpenAI playground and play with the ability to sample tokens with color-codings.
+\end{itemize}
+}
+
+# Likelihood Model
+
+## Data Generating Process
+
+The data generating process (DGP) is the underlying process that generates the data.
+*Green* elements are observed, *red* elements are latent:
+
+- **Latent-Thoughts** ?
+- **Outputs**: ?
+
+
+```{r graph-model, echo=FALSE, fig.align='center', out.width='50%'}
+knitr::include_graphics("../image/dep_model.png")
+```
+
+
+\note{
+\begin{itemize}
+\item Let's discuss the \textbf{data generating process} to motivate our likelihood model.
+\item Here's the graph: \textbf{green} elements are observed and \textbf{red} elements are latent.
+\item We don't get to see the red elements, but we can make \textbf{inferences} about them from information in the green elements.
+\item Let's focus on the \textbf{green} elements.
+\item \emph{Discuss graph.}
+\end{itemize}
+}
+
+
+## Likelihood Function
+
+**Likelihood Function** measures how well model explains the data:
+
+
+\note{
+\begin{itemize}
+\item Let's talk about the \textbf{likelihood function}, which is a way of \textbf{measuring} how well our model explains the data.
+\end{itemize}
+}
+
+
+# Simulation Study: n-gram models
+
+## The n-gram model
+
+\note{
+\begin{itemize}
+\item An $n$-gram model is a type of probabilistic language model for predicting the next item in a sequence.
+\item The items in the sequence can be thought of as words.
+\item BytePair Encoding (BPE) is a data compression technique that is used to perform the tokenization of words in the sequence.
+\item Multi-modal: tokens can represent any concept.
+\item Ideally all token types will be embedding in the same space. Lecun refers to this as a joint embedding space.
+\end{itemize}
+}
+
+## Synthetic Data
+
+How is the data generated in our simulation study?
+
+- **Algortihmic**: We generate data from an algorithmic process.
+- **Final Output** is determinstic if full context is known. This demonstrates importance of context length.
+
+\note{
+\begin{itemize}
+\item Let's talk about how we \textbf{generate} the data for our \textbf{simulation}.
+\end{itemize}
+}
+
+
+## Performance Metrics
+
+**Objective**: Evaluate the MLE (parameter weights of the NN).
+
+- Visualize the **simulated** sampling distribution of MLEs and $95\%$ CIs.
+- **MLE Evaluation**:
+  - **PPL**: Perplexity of the model. A kind of average inverse probability.
+    - Lower is better.
+    - Ilya Sutskever: "All you need is to be less perplexed."
+      (https://twitter.com/ilyasut/status/1628890948066312193?lang=en)
+    - Calculate the perplexity of the model on the test set.
+  - At inference time, we often greedily sample the next token from the model's distribution.
+  - We can also sample from the distribution and use the sample as the next token.
+    - We can do better: beam search
+
+\note{
+\begin{itemize}
+\item We want to evaluate the accuracy of our model.
+\end{itemize}
+}
+
+
+```{r fig-scale-tau, echo=F, out.width="100%", fig.align="center"}
+knitr::include_graphics("../image/pres/plot-q-vs-scale.1-mle_plot-q-vs-scale.3-mle.png")
+
+```
+
+# Inference Time
+
+
+## Masking: Causality and Other Types
+
+The causal model, also known as the autoregressive (AR) model, is Very
+effective. This is self-supervised learning. We use this method to
+estimate the DGP of the data.
+
+# Inference Time
+
+At 
+
+# Applications
+
+Local LLMs are useful for the following reasons:
+
+- **Interpretability**: We can understand the model's predictions.
+- **Efficiency**: We can use the model to make predictions in real-time.
+- **Privacy**: We can use the model to make predictions without sending data to the cloud.
+
+\note{
+\begin{itemize}
+\item We can use local LLMs for a variety of applications.
+\item \textbf{Interpretability}: We can understand the model's predictions.
+\item \textbf{Efficiency}: We can use the model to make predictions in real-time.
+\item \textbf{Privacy}: We can use the model to make predictions without sending data to the cloud.
+\end{itemize}
+}
+
+
+## LLM-OS
+
+Karpathy opined that the LLM final form is as the operating system of sorts.
+
+### Open Intereter
+
+As a preliminary example, we can use *OpenInterpreter*, which provides an
+LLM as an assistant for Linux command line usage.
+

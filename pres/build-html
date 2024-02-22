@@ -1,0 +1,2 @@
+#!/bin/bash
+Rscript -e "rmarkdown::render('pres.Rmd', output_format = 'ioslides_presentation')"

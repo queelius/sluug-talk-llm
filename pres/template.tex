@@ -1,0 +1,18 @@
+\documentclass{article} % using 'article' instead of 'standalone' for figures
+\usepackage{graphicx}  % for \includegraphics
+%\usepackage{subcaption} % for side-by-side figures
+\begin{document}
+
+\begin{figure}
+    \begin{minipage}{.5\textwidth}
+        \includegraphics[width=\linewidth]{__FILE1__}
+%        \caption{Caption for the first figure.}
+    \end{minipage}%
+    \begin{minipage}{.5\textwidth}
+        \includegraphics[width=\linewidth]{__FILE2__}
+%        \caption{Caption for the second figure.}
+    \end{minipage}
+\end{figure}
+
+
+\end{document}

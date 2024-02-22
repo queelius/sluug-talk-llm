@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Template file
+template="template.tex"
+
+# Check for input files
+if [ -z "$1" ] || [ -z "$2" ]; then
+    echo "Usage: $0 <file1.pdf> <file2.pdf> [output_name]"
+    exit 1
+fi
+
+# Output name based on input files if not provided
+output_name=${3:-$(basename -- "$1" .pdf)_$(basename -- "$2" .pdf)}
+
+# Create a temporary LaTeX file with substituted filenames
+sed -e "s|__FILE1__|$1|g" -e "s|__FILE2__|$2|g" $template > "${output_name}.tex"
+
+# Compile to PDF
+pdflatex "${output_name}.tex"
+
+# Convert to PNG
+#convert -density 300 "${output_name}.pdf" -quality 90 "${output_name}.png"
+
+#convert -density 300 "${output_name}.pdf" -quality 90 -trim +repage "${output_name}.png"
+#convert -density 300 "${output_name}.pdf" -fuzz 10% -trim +repage -quality 90 "${output_name}.png"
+#convert -density 300 "${output_name}.pdf" -fuzz 10% -trim +repage -shave 0x50 -quality 90 "${output_name}.png"
+convert -density 300 "${output_name}.pdf" -fuzz 10% -trim +repage -gravity south -chop 0x915 -quality 90 "${output_name}.png"
+
+
+
+
+
+
+rm "${output_name}.tex" "${output_name}.pdf" "${output_name}.log" "${output_name}.aux"
