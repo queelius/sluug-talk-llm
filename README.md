@@ -1,4 +1,4 @@
-# Large Language Models: A Crash Course
+# Large Language Models: Theory and Practice
 
 A revolution as big as the invention of the printing press. we will multiply our intellignce
 in a way similar (or maybe far beyond) to how the printing press multiplied our intelligence.
@@ -322,7 +322,7 @@ makes them extremely powerful, but when combined with other tools, they become e
 ### Vector Stores
 
 
-### Code nterpreters
+### Code Interpreters
 
 Programming languages are a very structured form of language. They are a way to communicate with
 computers, but also modern languages are a way for humans to communicate with each other. They are

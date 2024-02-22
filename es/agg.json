@@ -1,0 +1,10 @@
+{
+    "query": {
+    "size": 0,
+    "aggs": {
+        "articles_by_author": {
+            "terms": { "field": "author" }
+            }
+        }
+    }
+}

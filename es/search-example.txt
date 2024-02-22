@@ -1,0 +1,45 @@
+
+Here is the mapping for the `articles` ElasticSearch index:
+
+```json
+{
+  "articles": {
+    "mappings": {
+      "properties": {
+        "author": {
+          "type": "keyword"
+        },
+        "publication_date": {
+          "type": "date"
+        },
+        "title": {
+          "type": "text"
+        }
+      }
+    }
+  }
+}
+```
+
+Natural language query from a user.
+
+"Looking for articles published after Jan 21, 2024."
+
+Given this query should look like this:
+
+```json
+{
+  "query": {
+    "bool": {
+      "must": [{
+        "match": { "title": "future" }
+      }],
+      "filter": [{
+        "range": {
+          "publication_date": { "gte": "2024-01-21" }
+        }
+      }]
+    }
+  }
+}
+```
