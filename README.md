@@ -108,7 +108,7 @@ Brains programmed by evolution to survive in a complex world.
 
 - Given an (unknown) function $f$ and a set of input-output pairs $(x, f(x))$, learn a function $\hat{f}$ that approximates $f$ on the input-output pairs.
 
-- E.g., classification: $f$ : [:cat: or :dog:] -> {:cat:, :dog:}.
+- E.g., classification: $f$ : [ :cat: or :dog: ] -> { :cat: , :dog: }.
 
     - Use $\hat{f}$ to predict :cat: or :dog: for new images.
 
