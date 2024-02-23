@@ -108,7 +108,7 @@ Brains programmed by evolution to survive in a complex world.
 
 - Given an (unknown) function $f$ and a set of input-output pairs $(x, f(x))$, learn a function $\hat{f}$ that approximates $f$ on the input-output pairs.
 
-- E.g., classification: $f : [$:cat: or :dog:$] \mapsto \{$:cat:, :dog:$\}$.
+- E.g., classification: $f : [$:cat: or :dog:$] \\mapsto \\{$:cat:, :dog:$\\}$.
 
     - Use $\hat{f}$ to predict :cat: or :dog: for new images.
 
@@ -248,7 +248,7 @@ Let's go look at **Sora**: generative video, or world(s) simulator?
 Autoregressive (AR) models learn a probability distribution over training data by using self-supervised learning (SSL):
 
 $$
-\Pr\{x_1, x_2, \ldots, x_T\} = \prod_{t=1}^T \Pr\\{x_t | x_1, \ldots, x_{t-1}\\}
+\Pr\\{x_1, x_2, \ldots, x_T\\} = \prod_{t=1}^T \Pr\\{x_t | x_1, \ldots, x_{t-1}\\}
 $$
 
 - This is hard to learn, but with enough data and compute, a lot seems possible.
@@ -284,14 +284,14 @@ Early models were very sensitive to the prompt.
 - If you condition on crazy data, you get crazy outputs.
 
 $$
-\Pr\{\text{more crazy}|\text{crazy}\}
+\Pr\\{\text{more crazy}|\text{crazy}\\}
 $$
 
 Various prompting strategies have been developed to help the model generate more reliable outputs:
 
-    - Chain-of-thought (CoT)
-    - Tree-of-thought (ToT)
-    - and so on
+- Chain-of-thought (CoT)
+- Tree-of-thought (ToT)
+- and so on...
 
 ---
 
