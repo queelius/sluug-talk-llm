@@ -10,10 +10,11 @@ This repository contains the slides and code for the talk:
 
 - Demystifying Large Language Models (LLMs) on Linux: From Theory to Application
 
-It was given at the St. Louis Unix Users Group (SLUUG) on 2024-02-22.
+It was given for the St. Louis Unix Users Group (SLUUG) on 2024/2/22 @ 6:30 PM CST.
 
-SLUUG: https://www.stllinux.org/ :link:
-Meetup: https://www.meetup.com/saint-louis-unix-users-group/events/290697932/ :link:
+- SLUUG: https://www.stllinux.org/ :link:
+
+- Meetup: https://www.meetup.com/saint-louis-unix-users-group/events/290697932/ :link:
 
 ---
 
@@ -63,7 +64,7 @@ Meetup: https://www.meetup.com/saint-louis-unix-users-group/events/290697932/ :l
     - Integrate Prolog with LLM tool-use to help with planning and reasoning?
 
 ---
-# Reductive Reasoning
+### Reductive Reasoning
 
 ![bg left height:3.2in](./symbolic.png)
 
@@ -111,8 +112,8 @@ Brains programmed by evolution to survive in a complex world.
 - There are three main types of learning.
 
     - Supervised Learning (SL)
-    - Unsupervised Learning 
-    - Reinforcement Learning (RL)
+    - Unsupervised Learning 🔥
+    - Reinforcement Learning (RL) 💣
 
 - _Spoiler_: LLMs use self-supervised learning (SSL) and RL (RLHF).
 
@@ -124,7 +125,7 @@ Brains programmed by evolution to survive in a complex world.
 
 - Given an (unknown) function $f$ and a set of input-output pairs $(x, f(x))$, learn a function $\hat{f}$ that approximates $f$ on the input-output pairs.
 
-- E.g., classification: $f$ : [ :cat: or :dog: ] -> { :cat: , :dog: }.
+- E.g., classification: $f$ : [ :cat: or :dog: ] ↦ { :cat: , :dog: }.
 
     - Use $\hat{f}$ to predict :cat: or :dog: for new images.
 
@@ -154,7 +155,7 @@ Brains programmed by evolution to survive in a complex world.
 This is an agentic approach to learning. Agent interacts with environment and learns from the rewards it receives.
 - *Goal*: maximize the expected sum of rewards.
 - *Spoiler*: Agentic frameworks that include LLMs as a prediction component is a very active area of research.
-- Prediction + Search = Planning
+- `Prediction + Search = Planning`
     - Counterfactual reasoning
 - Hypothesis: `Compression = Prediction = Intelligence`
 - Big reason a lot of people are excited about Sora.
@@ -165,17 +166,19 @@ This is an agentic approach to learning. Agent interacts with environment and le
 
 # Early Failures in ML
 
-Reality is really complicated: $(x_1, x_2, \ldots, x_n)$,
-$n$ extremely large, and each $x_i$ is some complex object.
-
-Early efforts in ML were not very successful.
+Early efforts in ML were not very successful. Reality is complicated:
+$$
+(x_1, x_2, \ldots, x_n),
+$$
+$n$ extremely large and each $x_i$ some complex object.
 
 - Overfitting, curse of dimensionality, lack of data/compute.
 
 - To combat lack of data/compute, clever solutions developed.
-    - Many of these methods are no longer around.
+
+- Many of these methods are no longer around.
     > "The biggest lesson that can be read from 70 years of AI research is that general methods that leverage computation are ultimately the most effective, and by a large margin."
-        -- Richard Sutton in "The Bitter Lesson": 
+    -- Richard Sutton's Bitter Lesson
 ---
 
 # Neural Networks
@@ -264,7 +267,7 @@ Let's go look at **Sora**: generative video, or world(s) simulator?
 Autoregressive (AR) models learn a probability distribution over training data by using self-supervised learning (SSL):
 
 $$
-\Pr\\{x_1, x_2, \ldots, x_T\\} = \prod_{t=1}^T \Pr\\{x_t | x_1, \ldots, x_{t-1}\\}
+\Pr(x_1, x_2, \ldots, x_T) = \prod_{t=1}^T \Pr(x_t | x_1, \ldots, x_{t-1})
 $$
 
 - This is hard to learn, but with enough data and compute, a lot seems possible.
@@ -274,8 +277,6 @@ $$
 - **Language** represents much of the things that humans care and think about, so learning to predict it is a kind of general intelligence. (See: Sparks of AGI by Microsoft)
 
 ---
-
-
 
 # Sampling from LLMs
 
@@ -288,9 +289,9 @@ There are many different ways to sample from LLMs and change the behavior of the
 
 Good for controlling *exploitation* vs *exploration* if repeatedly sampling from the model to generate new or different outputs.
 
-- **Top-$k$ and Top-$p$ Sampling**: Choose the top-$k$ or top-$p$ tokens and sample from them.
+- **Top-k and Top-p Sampling**: Choose the top-$k$ or top-$p$ tokens and sample from them.
 
-- **Beam Search**: Explore multiple paths and sample the most likely.
+- **Beam Search**: Explore multiple paths and sample based on that joint probability.
 
 ---
 ## Prompting Strategies
@@ -300,7 +301,7 @@ Early models were very sensitive to the prompt.
 - If you condition on crazy data, you get crazy outputs.
 
 $$
-\Pr\\{\text{more crazy}|\text{crazy}\\}
+\Pr(\text{more crazy}|\text{crazy})
 $$
 
 Various prompting strategies have been developed to help the model generate more reliable outputs:
@@ -319,6 +320,7 @@ Basic idea: train a model to predict the next token in a sequence of tokens.
     - Pre-Train model to learn raw data distribution using SSL.
     - Fine-tune model to a specific dataset that is more relevant to a task.
     - RLHF model to bias it to produce outputs that people prefer.
+
 - **Goal**: Enable the generation of new data points for a given task.
 
 ---
@@ -326,31 +328,241 @@ Basic idea: train a model to predict the next token in a sequence of tokens.
 
 At inference, outputs are almost always out-of-distribution (OOD).
 
-- In-context learning: Transformers seem to be good at learning to generalize from data that was not seen during training.
-- Learning to predict the next token when the data is sufficiently complicated requires a general kind of intelligence.
-- Causal inductive bias: The model is biased to predict the next token based on the evidence of the previous tokens.
+- *In-Context Learning*: Transformers seem to be pretty good at generalizing from data that was not seen during training.
+
+- Learning to predict the next token when the data is sufficiently complicated may require a general kind of intelligence.
+
+- *Causal inductive bias*: The model is biased to predict the next token based on the evidence of the previous tokens.
+
 *Example*: "Based on all the previous evidence, I conclude that the murderer is ___". To do this well, it seems you must be able to reason about the evidence.       
  
- ---
-# My Naive N-Gram Model
+---
+## Naive N-Gram Model (AR) Over Bytes
 
-- Let's go to the notebook.
-- If you want to follow along, colab is available at:
-    - https://colab.research.google.com/drive/1ak4kOtbIQGXE5kuhhGTd55xu4qRpeZd7?usp=sharing
-- See my GitHub at https://github.com/queelius/sluug-talk-llm
+![bg left height:6in](./naive-ngram/expr_tree.png)
+
+We consider an AR-LM over bytes (256 tokens):
+
+- *Algorithmic training data*: Partial expression trees.
+    - *Sparse* markov chain of order $O(256^n)$ states.
+- Analyze how well model predicts the next token given the context.
+- How well does model capture the underlying process?
+    - *Spoiler*: It doesn't do well.
+
+---
+### Implementation Notes
+
+- We represent our $n$-gram model as a dictionary of dictionaries:
+    - Outer dictionary is indexed by context.
+    - Inner dictionary is indexed by next token.
+    - Each `token | context` maps frequency in training data.
+
+- This is simple model and simple data
+    - Hopefully, exploring its properties can help us understand LLMs.
+
+---
+## Colab
+
+Let's go to the notebook.
+
+- If you want to follow along, Colab is available at: https://colab.research.google.com/drive/1ak4kOtbIQGXE5kuhhGTd55xu4qRpeZd7?usp=sharing :link:
+- See my GitHub: https://github.com/queelius/sluug-talk-llm :link:
+
+---
+### Colab Comments
+
+*Inductive Bias*: Throwing away oldest bytes is a strong inductive bias:
+- Not necessarily true that the next byte is less dependent on the oldest bytes.
+
+*Generative Model*: generate text by starting with a any context and then sampling from the probability distribution for that context to get the next token.
+- Repeat until we have generated the desired number of tokens.
+- Same way LLMs work (but they work well).
+
+---
+### Colab: Advantages of Our Model
+
+Our model has some advantages compared to AR-LLMs. Since we simply *store* the data:
+- Easy to implement.
+- Easy to make it a lifelong learner. Store *more data*.
+
+---
+### Colab: Disadvantages of Our Model
+
+But, compared to more sophisticated models, they have huge disadvantages:
+
+- $n$-gram model is not able to capture long-range dependencies in the data.
+    - Number of states grows exponentially with the order of the model.
+    - It cannot scale to large contexts, and therefore cannot understand
+    nuances in the data.
+
+- $n$-gram model does not generalize out-of-distribution very well.
+    - Since language is a high-dimensional space, *most* contexts have never been seen before.
+
+---
+### Colab: Conclusion
+
+Key concept in ML: A *good* model *compresses* the data.
+
+- There is a notion that *compression* is a proxy for *understanding*.
+- Take a *physics simulation*: we don't need to store the position and velocity of every particle.
+    - We can just store the starting conditions and then let the laws of physics play out.
+    - Not perfect, but perfect prediction impossible.
+        - Only need to predict it well enough to make informed decisions.
+
+- `Prediction = compression = intelligence`
+    - The brain may be a good example of this.
+
+---
+## Finite State Machines
+
+We can view AR-LMs as finite state machines (if deterministic) otherwise Markov chains without loss of generality.
+
+- Computers are FSMs, just very large ones.
+- LLMs are also very large FSMs.
+
+https://www.lesswrong.com/posts/7qSHKYRnqyrumEfbt
+
+- Thus, AR-LLMs are differentiable computers that can learn from examples.
 
 ---
 # Tool-Use
 
-There is a lot of training data about how to use tools and APIs.
+There is a lot of training data about how to use tools and APIs.  🔨
 
-- Large LLMs like GPT-4 do a good job predicting when and how they should
-  use tools.
+- Large LLMs like GPT-4 do a good job predicting when and how they should use tools.
 
-- Let's go over to the ElasticSearch NLQ demo.
+- Let's go over to the ElasticSearch NLQ demo. 🔦
 
 ---
+# ElasticSearch Demo
+
+- Making all endpoints on the internet and UIs intelligent with small and fast LLMs.
+
+- As a trial, we are using ElasticSearch as a backend to enable natural language queries (NLQs) on ElasticSearch indexes (databases).
+
+- Key take-aways: GPT-4 / GPT-3.5 are good, small LLMs not quite there yet.
+  
+  - We have some ways to possibly improve them though. More on that later.
+
+  - And, of course, today's large models are tomorrow's small models.
+    - Desperately need more compute!
+
+---
+## ElasticSearch: What Is It?
+
+* An open source, scalable search engine.
+* Supports complex queries, aggregations, and full-text search.
+* Can be difficult to use.
+* Suppose we have `articles` index with `author` and `title` fields and want to count the number of articles by author:
+
+```json
+{
+  "size": 0,
+  "aggs": {
+    "articles_by_author": {
+      "terms": { "field": "author" }
+    }
+  }
+}
+```
+
+---
+## FastAPI: What Is It and How Do We Use It?
+
+* A fast web framework for building APIs with Python.
+* We are trying two things:
+  + Using ElasticSearch backend for storage and search.
+  + Using LLMs to convert natural language queries (NLQ) to ElasticSearch queries.
+* We expose a single endpoint `/{index}/nlq` that takes an
+index and an NLQ and returns a result from ElasticSearch.
+  - Hopefully the result is useful!
+* Later, remind me to open my firewall to allow access.
+
+---
+## Structure of Indexes
+
+I populated ElasticSearch with a two example indexes:
+
+* `articles`: A simple index with `author`, `title`, and 'publication_date' fields.
+
+* `gutenberg`: A more complex index with `author`, `publication_date`,`title`, and `content` fields.
+
+---
+## Code
+
+Let's look at some code. We'll switch to the code editor. There are
+a few files we need to look at:
+
+* `main.py`: The FastAPI app. We can probe it using the Swagger UI at `http://lab.metafunctor.com:6789/docs`.
+* There is a crude frontend at `http://lab.metafunctor.com:6789/`.
+  - I made the frontend by chatting with ChatGPT-4. By chatting, I mean asked two ill-formed questions and copied its code blocks.
+  - See this link: https://chat.openai.com/share/9c95ba2e-94e7-4d9f-ae89-095357fc39bd
+* `nlq.py`: The module that handles the NLQ to ElasticSearch query conversion.
+* `examples.py`: A crude example database. We'll talk about this in a bit.
+
+---
+## Issues
+
+* GPT-4 is good at converting NLQs to ElasticSearch queries, but it's slow and expensive to use at scale.
+  + We only need to use an LLM for a relatively narrow task.
+  + Maybe we don't need the full power of GPT-4?
+* Small LLMs, like `llama2`, did poorly on converting NLQs to ElasticSearch queries.
+
+---
+## Idea #1: Use GPT-4 to "Teach" Smaller Models
+
+Use GPT-4 to generate high-quality examples for smaller LLMs.
+
+* Feed examples into the context of the small LLM to do In-Context Learning (ICL).
+
+    + **ICL**: a model can generalize to new NLQs
+
+* How? Every now and then, use GPT-4 to do the task and store its NLQ to ElasticSearch query in example database.
+
+* Let's look at the `examples.py` code.
+    - DB is just a Python `{}` that doesn't persist.
+    - Didn't have the time to use a proper database.       
+        - Ironic considering this is all about how to use ElasticSearch!
+
+---
+### Issues
+
+The smaller models, like `llama2:13b` , do not seem to generalize
+from the examples very well.
+  + They often do better without "polluting" their context
+  with too much information.
+  + More tweaking? Or are these small models simply not up to the task.
+
+---
+## Idea #2: RAG (Retrieval-Augmented Generation)
+
+Maybe the smaller models need to be fed with more *relevant* examples. Use RAG to find relevant examples for the given index and NLQ :bulb:
+
+- Send the context through a language model to get a dense representation.
+
+- Store the representation of the examples in the database.
+
+- Find examples closest to the context of the NLQ and sample from them.
+
+- Insert the high-quality examples into the context of the small LLM to do ICL.
+
+---
+## Idea #3: Fine-Tuning
+
+* Fine-tune the smaller models on far more high-quality examples.
+
+* Small LLMs won't have to In-Context Learn as much.
+
+* See my GitHub repo: https://github.com/queelius/elasticsearch-lm
+
+  - Its README has a lot of verbiage.
+
+  - I just ran it through GPT-4 and didn't bother to edit it much.
+
+
+---
+
+
 # Discussion
 
-
-
+![bg left height:3.5in](./image-6.png)
