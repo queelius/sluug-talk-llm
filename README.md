@@ -8,32 +8,23 @@ math: mathjax
 
 This repository contains the slides and code for the talk "Large Language Models" given at the St. Louis Unix Users Group (SLUUG) on 2024-02-22.
 
-### URL for the Colab notebook on naive n-gram models
+---
 
-https://colab.research.google.com/drive/1ak4kOtbIQGXE5kuhhGTd55xu4qRpeZd7?usp=sharing
-
-### URLs for the ElasticSearch NLQ demo (up for a limited time at some point)
-
-http://lab.metafunctor.com:6789
-
-http://lab.metafunctor.com:6789/docs
-
-### URL for the private-gpt (not up unless asked)
-http://lab.metafunctor.com:3000
-
-
-## Alex Towell
+# Alex Towell
 
 - lex@metafunctor.com :email:
 - https://metafunctor.com :link:
 - https://github.com/queelius :rocket:
 - https://twitter.com/queelius :bird:
 
-- URL for this talk: https://github.com/queelius/sluug-talk-llm :link:
+- Important URLs for this talk:
+    - Talk link: https://github.com/queelius/sluug-talk-llm :link:
+    - Colab notebook on n-gram model: https://colab.research.google.com/drive/1ak4kOtbIQGXE5kuhhGTd55xu4qRpeZd7?usp=sharing
+    - ElasticSearch NLQ demo (down): http://lab.metafunctor.com:6789 (API: http://lab.metafunctor.com:6789/docs)
 
 ---
 
-## Outline of Talk
+# Outline of Talk
 
 - Theoretical Background
 
@@ -49,7 +40,7 @@ http://lab.metafunctor.com:3000
 
 ---
 
-## Good-Old-Fashioned AI (GOFAI)
+# Good-Old-Fashioned AI (GOFAI)
 
 - Find a way to symbolically represent the problem and
   then use logic or rules to solve it.
@@ -65,7 +56,7 @@ http://lab.metafunctor.com:3000
     - Integrate Prolog with LLM tool-use to help with planning and reasoning?
 
 ---
-## Reductive Reasoning
+# Reductive Reasoning
 
 ![bg left height:3.2in](./symbolic.png)
 
@@ -78,7 +69,7 @@ GOFAI works for a lot of problems we care about:
 - Solve simpler problems and combine.
 
 ---
-## Limits of GOFAI
+# Limits of GOFAI
 
 Many problems are hard to break down into simpler parts.
 
@@ -91,7 +82,7 @@ Many problems are hard to break down into simpler parts.
         -- Steven Pinker
     - Playing with legos is hard but multivariate calculus is easy (for a computer).
 ---
-## How Do Our Brains Work?
+# How Do Our Brains Work?
 
 ![bg left height:3.5in](./subsymbolic.png)
 
@@ -104,7 +95,7 @@ Brains programmed by evolution to survive in a complex world.
 
 ---
 
-## Machine Learning
+# Machine Learning
 
 :bulb: Let's have the computer learn from data.
 
@@ -120,7 +111,7 @@ Brains programmed by evolution to survive in a complex world.
 
 ---
 
-### Type of Learning (1): Supervised Learning
+## Type of Learning (1): Supervised Learning
 
 **Learning from labeled data**. We have some input and output data, and we want to learn how to map the input to the output.
 
@@ -135,7 +126,7 @@ Brains programmed by evolution to survive in a complex world.
 - **Fine-Tuning** LLMs is supervised learning: improve it on specific labeled tasks.
 
 ---
-### Type of Learning (2): Unsupervised Learning
+## Type of Learning (2): Unsupervised Learning
 
 **No labeled data**. Learn the underlying structure of the data.
 
@@ -151,7 +142,7 @@ Brains programmed by evolution to survive in a complex world.
 
 ---
 
-### Final Type of Learning (3): Reinforcement Learning
+## Final Type of Learning (3): Reinforcement Learning
 
 This is an agentic approach to learning. Agent interacts with environment and learns from the rewards it receives.
 - *Goal*: maximize the expected sum of rewards.
@@ -165,7 +156,7 @@ This is an agentic approach to learning. Agent interacts with environment and le
 
 ---
 
-## Early Failures in ML
+# Early Failures in ML
 
 Reality is really complicated: $(x_1, x_2, \ldots, x_n)$,
 $n$ extremely large, and each $x_i$ is some complex object.
@@ -180,7 +171,7 @@ Early efforts in ML were not very successful.
         -- Richard Sutton in "The Bitter Lesson": 
 ---
 
-## Neural Networks
+# Neural Networks
 
 ![bg left height:6in](./NN.jpg)
 
@@ -193,7 +184,7 @@ Neural Networks (NN) are one the solutions that stuck around.
 - NNs seem to scale to as much data and compute as we can throw at them.
 
 ---
-## Inductive Bias
+# Inductive Bias
 
 Observations may have an infinite set of hypothesis that are compatible with the data.
 
@@ -211,7 +202,7 @@ Observations may have an infinite set of hypothesis that are compatible with the
 - **No Free Lunch Theorem**: No model is optimal for all tasks.
 ---
 
-## Era of Deep Learning
+# Era of Deep Learning
 
 ![bg left height:4in](./imagenet.png)
 
@@ -223,7 +214,7 @@ One of the hardest parts is learning sample efficient representation of the data
 
 ---
 
-## Era of Deep Learning (cont.)
+# Era of Deep Learning (cont.)
 
 ![bg left height:4.1in](./image-4.png)
 
@@ -236,7 +227,7 @@ DNNs (feed-forward) learn little circuit programs that can generate parts of the
 
 
 ---
-## Era of Generative AI
+# Era of Generative AI
 
 ![bg left height:4.1in](image-5.png)
 
@@ -247,7 +238,7 @@ Generative AI "reverses" the arrows
 - They have completely changed our expectations of what computers can do.
 
 ---
-## Era of Generative AI (cont.)
+# Era of Generative AI (cont.)
 
 We now have computers that can see, hear, understand, and generate all of these things.
 
@@ -261,7 +252,7 @@ Let's go look at **Sora**: generative video, or world(s) simulator?
 
 
 ---
-## Large Language Models (LLMs)
+# Large Language Models (LLMs)
 
 Autoregressive (AR) models learn a probability distribution over training data by using self-supervised learning (SSL):
 
@@ -279,7 +270,7 @@ $$
 
 
 
-## Sampling from LLMs
+# Sampling from LLMs
 
 There are many different ways to sample from LLMs and change the behavior of the model.
 
@@ -313,22 +304,28 @@ Various prompting strategies have been developed to help the model generate more
 
 ---
 
+# LLM Overview
 
-## LLM Overview
+Basic idea: train a model to predict the next token in a sequence of tokens.
 
-- **Task**: Estimate the training data's probability distribution using next-token prediction (SSL)
-  - Pre-trained models predict the raw data distribution.
-  - Fine-Tuning: Train the model to a specific data that is more relevant to a task.
-  - RLHF: Bias the model to produce outputs that people prefer.
-- **Goal**: Enable the generation of new data points that resemble in some ways the characteristics the data.
-  - At inference, outputs are almost always out-of-distribution (OOD).
-  - In-context learning: Transformers seem to be good at learning to generalize from data that was not seen during training.
-      - Learning to predict the next token when the data is sufficiently complicated requires a general kind of intelligence.
-      - Causal inductive bias: The model is biased to predict the next token based on the evidence of the previous tokens.
-          *Example*: "Based on all the previous evidence, I conclude that the murderer is ___". To do this well, it seems you must be able to reason about the evidence.       
+- **Task**: Given a sequence of tokens, predict the next token.
+    - Pre-Train model to learn raw data distribution using SSL.
+    - Fine-tune model to a specific dataset that is more relevant to a task.
+    - RLHF model to bias it to produce outputs that people prefer.
+- **Goal**: Enable the generation of new data points for a given task.
+
+---
+## OOD Generalization
+
+At inference, outputs are almost always out-of-distribution (OOD).
+
+- In-context learning: Transformers seem to be good at learning to generalize from data that was not seen during training.
+- Learning to predict the next token when the data is sufficiently complicated requires a general kind of intelligence.
+- Causal inductive bias: The model is biased to predict the next token based on the evidence of the previous tokens.
+*Example*: "Based on all the previous evidence, I conclude that the murderer is ___". To do this well, it seems you must be able to reason about the evidence.       
  
  ---
-## My Naive N-Gram Model
+# My Naive N-Gram Model
 
 - Let's go to the notebook.
 - If you want to follow along, colab is available at:
@@ -336,7 +333,7 @@ Various prompting strategies have been developed to help the model generate more
 - See my GitHub at https://github.com/queelius/sluug-talk-llm
 
 ---
-## Tool-Use
+# Tool-Use
 
 There is a lot of training data about how to use tools and APIs.
 
@@ -345,9 +342,8 @@ There is a lot of training data about how to use tools and APIs.
 
 - Let's go over to the ElasticSearch NLQ demo.
 
-
 ---
-## Discussion
+# Discussion
 
 
 
