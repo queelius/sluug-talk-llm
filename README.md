@@ -6,7 +6,14 @@ math: mathjax
 
 # SLUUG Talk: Large Language Models
 
-This repository contains the slides and code for the talk "Large Language Models" given at the St. Louis Unix Users Group (SLUUG) on 2024-02-22.
+This repository contains the slides and code for the talk:
+
+- Demystifying Large Language Models (LLMs) on Linux: From Theory to Application
+
+It was given at the St. Louis Unix Users Group (SLUUG) on 2024-02-22.
+
+SLUUG: https://www.stllinux.org/ :link:
+Meetup: https://www.meetup.com/saint-louis-unix-users-group/events/290697932/ :link:
 
 ---
 
