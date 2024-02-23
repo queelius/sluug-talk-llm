@@ -248,7 +248,7 @@ Let's go look at **Sora**: generative video, or world(s) simulator?
 Autoregressive (AR) models learn a probability distribution over training data by using self-supervised learning (SSL):
 
 $$
-\Pr\{x_1, x_2, \ldots, x_T\} = \prod_{t=1}^T \Pr\{x_t | x_1, \ldots, x_{t-1}\}
+\Pr\{x_1, x_2, \ldots, x_T\} = \prod_{t=1}^T \Pr\\{x_t | x_1, \ldots, x_{t-1}\\}
 $$
 
 - This is hard to learn, but with enough data and compute, a lot seems possible.
